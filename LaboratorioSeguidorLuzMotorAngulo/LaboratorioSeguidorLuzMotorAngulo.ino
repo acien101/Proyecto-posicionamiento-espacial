@@ -7,7 +7,7 @@ int botonIzquierda = 6;
 int optoacoplador = 2;
 
 boolean previousAngle;
-double angulo;
+int angulo;
 
 String estado = "";
 
@@ -24,11 +24,12 @@ void setup() {
   
   previousAngle = digitalRead(optoacoplador);
   angulo = 0;
-  
-  while(digitalRead(botonIzquierda) == 1){
+
+  /*
+  while(digitalRead(botonDerecha) == 1){
 
     //Serial.println("NO HAY PULSADO");
-    servoContinuo.write(85);
+    servoContinuo.write(100);
 
     if(previousAngle != digitalRead(optoacoplador)){
       angulo = angulo + 5;
@@ -38,6 +39,10 @@ void setup() {
     previousAngle = digitalRead(optoacoplador);
     }
   servoContinuo.write(93);
+
+  */
+  goToAngle(180);
+  goToAngle(50);
 }
 
 void loop() {
@@ -53,12 +58,38 @@ void loop() {
 }
 
 void initAngle(){
-  while((digitalRead(botonDerecha) == 1)){
+  while((digitalRead(botonIzquierda) == 1)){
 
     //Serial.println("NO HAY PULSADO");
-    servoContinuo.write(98);
+    servoContinuo.write(88);
   }
   servoContinuo.write(93);
 
 }
+
+void goToAngle(int finishAngle){
+  while(angulo != finishAngle){
+    if(angulo > finishAngle){
+      servoContinuo.write(88);
+
+      if(previousAngle != digitalRead(optoacoplador)){
+        angulo -= 5;
+      }
+      previousAngle = digitalRead(optoacoplador);
+    
+    }
+    if(angulo < finishAngle){
+      servoContinuo.write(98);
+
+      if(previousAngle != digitalRead(optoacoplador)){
+        angulo += 5;
+      }
+      previousAngle = digitalRead(optoacoplador);
+    
+    }
+  }
+  servoContinuo.write(93);
+}
+
+
 
