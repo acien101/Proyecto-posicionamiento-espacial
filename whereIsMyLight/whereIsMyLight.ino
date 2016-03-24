@@ -14,6 +14,7 @@ void loop() {
   izquierda = analogRead(A2);
   derecha = analogRead(A3);
 
+/*
   if((izquierda - derecha) > 100){    // Hay más luz en derecha que en la izquierda
     Serial.println("derecha");   
   }
@@ -23,6 +24,19 @@ void loop() {
   if((izquierda - derecha) < 100 && (izquierda - derecha) > -20){     //Más o menos hay la misma luz
     Serial.println("nada");
   }
+
+  */
+
+  if((abajo - arriba) > 50){
+    Serial.println("arriba");
+  }
+  if((abajo - arriba) < -50){
+    Serial.println("abajo");
+  }
+  if((abajo - arriba) < 50 && (abajo - arriba) > -50){
+    Serial.println("igual");
+  }
+  
 
   delay(100);
 }
