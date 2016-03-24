@@ -1,11 +1,22 @@
+
+#include <Servo.h>
+
 int abajo;
 int arriba;
 int izquierda;
 int derecha;
 
+int pos;
+
+Servo servo;
+
 void setup() {
   Serial.begin(9600);
 
+  servo.attach(3);
+  
+  pos = 180;
+  servo.write(pos);
 }
 
 void loop() {
@@ -27,16 +38,23 @@ void loop() {
 
   */
 
-  if((abajo - arriba) > 50){
-    Serial.println("arriba");
-  }
-  if((abajo - arriba) < -50){
+  if((abajo - arriba) > 50){      //Hay más luz abajo que arriba
     Serial.println("abajo");
+
+    if(pos != 180){
+      pos++;
+    }
   }
-  if((abajo - arriba) < 50 && (abajo - arriba) > -50){
+  if((abajo - arriba) < -50){     //Hay más luz arriba que abajo
+    Serial.println("arriba");
+
+    if(pos != 60){
+      pos--;
+    }
+  }
+  if((abajo - arriba) < 50 && (abajo - arriba) > -50){        //Más o menos la misma luz
     Serial.println("igual");
   }
   
-
-  delay(100);
+  servo.write(pos);
 }
