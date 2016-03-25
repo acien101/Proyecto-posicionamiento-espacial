@@ -25,8 +25,10 @@ void setup() {
   pinMode(botonIzquierda, INPUT);
   pinMode(botonDerecha, INPUT);
   pinMode(optoacoplador, INPUT);
+
+
   
-  servoContinuo.attach(3);
+  servoContinuo.attach(5);
   initAngle();
   
   previousAngle = digitalRead(optoacoplador);
@@ -34,10 +36,10 @@ void setup() {
 
    delay(1000);
 
-   /*
-   servo.attach(5);
+   
+   servo.attach(3);
    posVertical = 180;
-   servo.write(posVertical);*/
+   servo.write(posVertical);
 
    
 }
@@ -49,7 +51,7 @@ void loop() {
   arriba = analogRead(A1);
   izquierda = analogRead(A2);
   derecha = analogRead(A3);
-
+  
 
   if((izquierda - derecha) > 100){    // Hay más luz en derecha que en la izquierda
     Serial.println("derecha");
@@ -69,7 +71,7 @@ void loop() {
     Serial.println("nada");
   }
 
-/*
+
   if((abajo - arriba) > 50){      //Hay más luz abajo que arriba
     Serial.println("abajo");
 
@@ -90,7 +92,8 @@ void loop() {
   
   
   servo.write(posVertical);
-*/
+  
+
   
 }
 
