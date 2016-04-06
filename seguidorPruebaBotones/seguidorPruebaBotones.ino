@@ -1,4 +1,6 @@
 
+
+
 int botonDerecha = 7;
 int botonIzquierda = 6;
 int optoacoplador = 2;
